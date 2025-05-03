@@ -6,9 +6,9 @@ const isNavbarVisible = ref(true) // State to track navbar visibility
 // Function to handle scroll events
 const handleScroll = () => {
   if (window.scrollY > 50) {
-    isNavbarVisible.value = false; // Hide navbar when scrolling down
+    isNavbarVisible.value = false // Hide navbar when scrolling down
   } else {
-    isNavbarVisible.value = true; // Show navbar when at the top of the page
+    isNavbarVisible.value = true // Show navbar when at the top of the page
   }
 }
 
@@ -22,11 +22,18 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <nav :class="['navbar', 'navbar-expand-lg', 'navbar-light', 'mb-4', 'fixed-top', { 'd-none': !isNavbarVisible }]">
+  <nav
+    :class="[
+      'navbar',
+      'navbar-expand-lg',
+      'navbar-light',
+      'mb-4',
+      'fixed-top',
+      { 'd-none': !isNavbarVisible },
+    ]"
+  >
     <div class="container-fluid">
-      <router-link class="navbar-brand" to="/">
-        📰 NewsSphere
-      </router-link>
+      <router-link class="navbar-brand" to="/"> 📰 NewsSphere </router-link>
       <p class="navbar-motto">Capturing the heartbeat of the latest news !!!🔥</p>
       <button
         class="navbar-toggler"
@@ -41,31 +48,36 @@ onUnmounted(() => {
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
             <router-link class="nav-link" to="/">
-              <i class="fas fa-home"></i> <!-- Home Icon -->
+              <i class="fas fa-home"></i>
+              <!-- Home Icon -->
               <span>Home</span>
             </router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/category/business">
-              <i class="fas fa-briefcase"></i> <!-- Business Icon -->
+              <i class="fas fa-briefcase"></i>
+              <!-- Business Icon -->
               <span>Business</span>
             </router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/category/technology">
-              <i class="fas fa-laptop"></i> <!-- Technology Icon -->
+              <i class="fas fa-laptop"></i>
+              <!-- Technology Icon -->
               <span>Technology</span>
             </router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/about">
-              <i class="fas fa-users"></i> <!-- About Us Icon -->
+              <i class="fas fa-users"></i>
+              <!-- About Us Icon -->
               <span>About Us</span>
             </router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/contact">
-              <i class="fas fa-phone"></i> <!-- Contact Us Icon -->
+              <i class="fas fa-phone"></i>
+              <!-- Contact Us Icon -->
               <span>Contact Us</span>
             </router-link>
           </li>
@@ -92,8 +104,8 @@ body {
 
 /* Navbar background color */
 .navbar-light {
-  background-color: #ffffff; /* White background */
-  color: #003366; /* Dark blue text */
+  background-color: #74b1ee; /* White background */
+  color: #05bcdc; /* Dark blue text */
 }
 
 /* Navbar text and link color */

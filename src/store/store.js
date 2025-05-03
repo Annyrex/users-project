@@ -9,7 +9,7 @@ export default createStore({
     headlineNews: null,
     selectedNews: null,
     categorizedNews: [],
-    isLoading: false // ✅ Added loading state
+    isLoading: false, // ✅ Added loading state
   },
 
   getters: {
@@ -19,13 +19,13 @@ export default createStore({
     getCategorizedNews: (state) => state.categorizedNews,
     isLoading: (state) => state.isLoading, // ✅ Loading getter
 
-    techNews: (state) => state.allNews.filter(n => n.category === 'technology'),
+    techNews: (state) => state.allNews.filter((n) => n.category === 'technology'),
 
     searchNews: (state) => (keyword) => {
-      return state.allNews.filter(news =>
-        news.title.toLowerCase().includes(keyword.toLowerCase())
+      return state.allNews.filter((news) =>
+        news.title.toLowerCase().includes(keyword.toLowerCase()),
       )
-    }
+    },
   },
 
   mutations: {
@@ -41,9 +41,10 @@ export default createStore({
     SET_CATEGORIZED_NEWS(state, news) {
       state.categorizedNews = news
     },
-    SET_LOADING(state, value) { // ✅ Mutation to update loading
+    SET_LOADING(state, value) {
+      // ✅ Mutation to update loading
       state.isLoading = value
-    }
+    },
   },
 
   actions: {
@@ -93,6 +94,6 @@ export default createStore({
       } finally {
         commit('SET_LOADING', false)
       }
-    }
-  }
+    },
+  },
 })
