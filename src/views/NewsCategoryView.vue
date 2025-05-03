@@ -15,19 +15,20 @@ const fetchCategory = () => {
   store.dispatch('fetchNewsByCategory', category.value)
 }
 
-// Fetch on mount
 onMounted(fetchCategory)
-
-// Watch for route param change
 watch(category, fetchCategory)
 </script>
 
-
 <template>
-  <div class="container">
+  <div class="container mt-5">
     <h2 class="text-capitalize mb-4">{{ category }} News</h2>
 
-    <div v-if="loading">Loading...</div>
+    <div v-if="loading" class="text-center my-5">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
     <div v-else class="row">
       <div class="col-md-4 mb-4" v-for="item in categoryNews" :key="item.uuid">
         <NewsCard

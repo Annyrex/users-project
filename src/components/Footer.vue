@@ -4,16 +4,33 @@
       <div class="row">
         <div class="col-md-4 mb-3">
           <h5>{{ appName }}</h5>
-          <p>Your trusted source for the latest news across the globe. Stay informed with headlines, tech, business, and more.</p>
+          <p>
+            Your trusted source for the latest news across the globe. Stay informed with headlines,
+            tech, business, and more.
+          </p>
         </div>
         <div class="col-md-4 mb-3">
           <h6>Quick Links</h6>
           <ul class="list-unstyled">
             <li><RouterLink class="text-light text-decoration-none" to="/">Home</RouterLink></li>
-            <li><RouterLink class="text-light text-decoration-none" to="/news/category/business">Business</RouterLink></li>
-            <li><RouterLink class="text-light text-decoration-none" to="/news/category/technology">Technology</RouterLink></li>
-            <li><RouterLink class="text-light text-decoration-none" to="/about">About Us</RouterLink></li>
-            <li><RouterLink class="text-light text-decoration-none" to="/contact">Contact Us</RouterLink></li>
+            <li>
+              <RouterLink class="text-light text-decoration-none" to="/news/category/business"
+                >Business</RouterLink
+              >
+            </li>
+            <li>
+              <RouterLink class="text-light text-decoration-none" to="/news/category/technology"
+                >Technology</RouterLink
+              >
+            </li>
+            <li>
+              <RouterLink class="text-light text-decoration-none" to="/about">About Us</RouterLink>
+            </li>
+            <li>
+              <RouterLink class="text-light text-decoration-none" to="/contact"
+                >Contact Us</RouterLink
+              >
+            </li>
           </ul>
         </div>
         <div class="col-md-4 mb-3">
@@ -32,13 +49,13 @@
 
 <script>
 export default {
-  name: 'Footer',
+  name: 'Footer-',
   data() {
     return {
-      appName: 'GlobalScope News',
-      currentYear: new Date().getFullYear()
-    };
-  }
+      appName: 'NewsSphere',
+      currentYear: new Date().getFullYear(),
+    }
+  },
 }
 </script>
 

@@ -1,3 +1,42 @@
+<template>
+  <div class="container py-5 my-5">
+    <h2 class="mb-4 text-center fw-bold display-4">Contact Us</h2>
+    <p class="mb-4 text-center fs-4">Have a question or want to advertise with us? Fill out the form below!</p>
+
+    <div v-if="isSubmitted" class="alert alert-success text-center" role="alert">
+      ✅ Thank you! Your message has been sent.
+    </div>
+
+    <div v-if="hasError" class="alert alert-danger text-center" role="alert">
+      ❌ Something went wrong. Please try again.
+    </div>
+
+    <form 
+      @submit="handleSubmit"
+      action="https://formspree.io/f/xdkgargj" 
+      method="POST"
+      class="shadow-lg p-4 rounded bg-light"
+    >
+      <div class="mb-3">
+        <label for="name" class="form-label fs-5 fw-semibold">Full Name</label>
+        <input type="text" class="form-control custom-input" name="name" id="name" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="email" class="form-label fs-5 fw-semibold">Email address</label>
+        <input type="email" class="form-control custom-input" name="_replyto" id="email" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="message" class="form-label fs-5 fw-semibold">Message</label>
+        <textarea class="form-control custom-input" name="message" id="message" rows="5" required></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-lg w-100">Send Message</button>
+    </form>
+  </div>
+</template>
+
 <script setup>
 import { ref } from 'vue'
 
@@ -33,40 +72,33 @@ function handleSubmit(e) {
 }
 </script>
 
-<template>
-  <div class="container mt-5 mb-5">
-    <h2>Contact Us</h2>
-    <p>Have a question or want to advertise with us? Fill out the form below!</p>
+<style scoped>
+.custom-input {
+  border: 2px solid #87cefa; /* Light blue */
+  border-radius: 5px;
+  box-shadow: none;
+  transition: border-color 0.3s ease-in-out;
+}
 
-    <div v-if="isSubmitted" class="alert alert-success" role="alert">
-      ✅ Thank you! Your message has been sent.
-    </div>
+.custom-input:focus {
+  border-color: #00aaff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 170, 255, 0.5);
+}
 
-    <div v-if="hasError" class="alert alert-danger" role="alert">
-      ❌ Something went wrong. Please try again.
-    </div>
+h2 {
+  color: #333;
+}
 
-    <form 
-      @submit="handleSubmit"
-      action="https://formspree.io/f/xdkgargj" 
-      method="POST"
-    >
-      <div class="mb-3">
-        <label for="name" class="form-label">Full Name</label>
-        <input type="text" class="form-control" name="name" id="name" required>
-      </div>
+p {
+  color: #555;
+}
 
-      <div class="mb-3">
-        <label for="email" class="form-label">Email address</label>
-        <input type="email" class="form-control" name="_replyto" id="email" required>
-      </div>
+button {
+  transition: background-color 0.3s;
+}
 
-      <div class="mb-3">
-        <label for="message" class="form-label">Message</label>
-        <textarea class="form-control" name="message" id="message" rows="5" required></textarea>
-      </div>
-
-      <button type="submit" class="btn btn-primary">Send Message</button>
-    </form>
-  </div>
-</template>
+button:hover {
+  background-color: #0077cc;
+}
+</style>

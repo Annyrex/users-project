@@ -1,11 +1,14 @@
 <template>
-  <div>
+  <div id="app" class="d-flex flex-column min-vh-100">
     <NavBar />
-   
-    <div class="container mt-4">
 
-      <router-view />
-    </div>
+    <main class="flex-grow-1">
+      <div class="container mt-4">
+        <router-view />
+      </div>
+    </main>
+
+    <Footer />
 
     <!-- Back-to-top Button -->
     <button
@@ -16,9 +19,6 @@
       ↑
     </button>
   </div>
-    <div>
-     <Footer />
-    </div>
 </template>
 
 <script setup>
@@ -29,31 +29,18 @@ import Footer from './components/Footer.vue'
 const showBackToTop = ref(false)
 
 const handleScroll = () => {
-  if (window.scrollY > 300) {
-    showBackToTop.value = true
-  } else {
-    showBackToTop.value = false
-  }
+  showBackToTop.value = window.scrollY > 300
 }
 
 const scrollToTop = () => {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth',
-  })
+  window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
-onMounted(() => {
-  window.addEventListener('scroll', handleScroll)
-})
-
-onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll)
-})
+onMounted(() => window.addEventListener('scroll', handleScroll))
+onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 </script>
 
 <style>
-/* Global styles for the whole app */
 * {
   margin: 0;
   padding: 0;
@@ -62,26 +49,26 @@ onUnmounted(() => {
 
 html, body {
   height: 100%;
-  min-height: 100%;  
+  min-height: 100%;
+  font-family: Arial, sans-serif;
   background: linear-gradient(to bottom, skyblue, white);
   background-size: 100% 100%;
-  background-attachment: fixed; 
-  font-family: Arial, sans-serif;
-  display: flex;
-  flex-direction: column;
+  background-attachment: fixed;
 }
 
 #app {
-  flex: 1; 
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 /* Back to Top Button */
 .back-to-top {
   position: fixed;
-  bottom: 20px;  /* Adjust this to set the vertical position */
-  left: 50%;     /* Center horizontally */
-  transform: translateX(-50%);  /* Correct for the 50% offset */
-  font-size: 3rem;  /* 3 times the original size */
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 3rem;
   background-color: transparent;
   border: none;
   color: #007bff;

@@ -8,12 +8,12 @@ const route = useRoute()
 const router = useRouter()
 
 const selectedNews = computed(() => store.state.selectedNews)
+const loading = computed(() => store.state.loading)
 
 onMounted(() => {
   store.dispatch('fetchNewsByUuid', route.params.uuid)
 })
 
-// Function to go back
 const goBack = () => {
   router.back()
 }
@@ -21,12 +21,18 @@ const goBack = () => {
 
 <template>
   <div class="container my-5 mb-5">
-    <div v-if="selectedNews">
+    <div v-if="loading" class="text-center my-5">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
+    <div v-else-if="selectedNews">
       <img
         v-if="selectedNews.image_url"
         :src="selectedNews.image_url"
         alt="News Image"
-        class="img-fluid mb-3 mt-5"
+        class="img-fluid mb-3 mt-3"
       />
 
       <h2 class="mb-3">{{ selectedNews.title }}</h2>
@@ -34,30 +40,27 @@ const goBack = () => {
       <p><strong>Source:</strong> {{ selectedNews.source }}</p>
       <p class="mt-3">{{ selectedNews.description }}</p>
 
-      <!-- External link -->
-      <a
-        :href="selectedNews.url"
-        target="_blank"
-        class="btn btn-secondary mt-4"
-      >
+      <a :href="selectedNews.url" target="_blank" class="btn btn-secondary mt-4">
         Read Full Article
       </a>
 
-      <!-- 👇 Go Back button at the bottom -->
       <div class="mt-4">
-        <button class="btn btn-outline-secondary" @click="goBack">
-          ← Go Back
-        </button>
+        <button class="btn btn-outline-secondary" @click="goBack">← Go Back</button>
       </div>
     </div>
 
-    <div v-else>
-      <p>Loading news details...</p>
+    <div v-else class="text-center my-5">
+      <p>News details could not be loaded. Please try again.</p>
+      <button class="btn btn-outline-secondary" @click="goBack">← Back to News</button>
     </div>
   </div>
 </template>
+
 <style scoped>
-.card {
-  background-color: #343a40; /* Dark background color */
+img {
+  border-radius: 10px;
+  max-height: 500px;
+  object-fit: cover;
+  width: 100%;
 }
 </style>

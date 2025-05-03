@@ -7,7 +7,10 @@
         <h1 class="headline-title mb-2">{{ headlineNews.title }}</h1>
 
         <!-- Subheading-style Category -->
-        <div class="headline-category" v-if="headlineNews.categories && headlineNews.categories.length">
+        <div
+          class="headline-category"
+          v-if="headlineNews.categories && headlineNews.categories.length"
+        >
           {{ formatCategory(headlineNews.categories[0]) }}
         </div>
 
@@ -18,8 +21,23 @@
     <!-- Latest News Section -->
     <div class="container">
       <h2 class="mb-4">Latest News</h2>
-      <div class="row">
-        <div class="col-md-4 mb-4" v-for="item in allNews" :key="item.uuid">
+
+      <!-- Search Input -->
+      <div class="mb-4">
+        <input
+          type="text"
+          class="form-control"
+          v-model="searchTerm"
+          placeholder="Search news by title or keyword..."
+        />
+      </div>
+
+      <div v-if="filteredNews.length === 0">
+        <p class="text-muted">No news found matching your search.</p>
+      </div>
+
+      <div class="row" v-else>
+        <div class="col-md-4 mb-4" v-for="item in filteredNews" :key="item.uuid">
           <NewsCard
             :uuid="item.uuid"
             :image_url="item.image_url"
@@ -34,13 +52,25 @@
 </template>
 
 <script setup>
-import { onMounted, computed } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { useStore } from 'vuex'
 import NewsCard from '../components/NewsCard.vue'
 
 const store = useStore()
+const searchTerm = ref('')
+
 const allNews = computed(() => store.state.allNews)
 const headlineNews = computed(() => store.state.headlineNews)
+
+// Filtered news based on search term
+const filteredNews = computed(() => {
+  if (!searchTerm.value.trim()) {
+    return allNews.value
+  }
+  return allNews.value.filter((news) =>
+    news.title.toLowerCase().includes(searchTerm.value.toLowerCase()),
+  )
+})
 
 const formatCategory = (category) => {
   return category.charAt(0).toUpperCase() + category.slice(1)
@@ -56,11 +86,10 @@ onMounted(() => {
 /* Headline Section */
 .headline-section {
   width: 100%;
-  background: linear-gradient(to top bottom, white, skyblue);
-
-  padding: 80px 20px 40px; /* Top padding increased */
-  margin-top: 80px; /* Space below navbar */
-  border-radius: 0 0 20px 20px; /* Optional rounded bottom */
+  background: linear-gradient(to bottom, white, skyblue);
+  padding: 80px 20px 40px;
+  margin-top: 80px;
+  border-radius: 0 0 20px 20px;
 }
 
 .headline-image {

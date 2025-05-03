@@ -23,9 +23,9 @@ onUnmounted(() => {
 
 <template>
   <nav :class="['navbar', 'navbar-expand-lg', 'navbar-light', 'mb-4', 'fixed-top', { 'd-none': !isNavbarVisible }]">
-    <div class="container-fluid ">
+    <div class="container-fluid">
       <router-link class="navbar-brand" to="/">
-        📰 NewSphere
+        📰 NewsSphere
       </router-link>
       <p class="navbar-motto">Capturing the heartbeat of the latest news !!!🔥</p>
       <button
@@ -99,7 +99,7 @@ body {
 /* Navbar text and link color */
 .navbar-brand {
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 2.5rem; /* Increase the font size to make NewsSphere bigger */
   color: #003366; /* Dark blue */
 }
 
